@@ -66,7 +66,6 @@ void BFS(int m[][COL], int src[], int dest[])
             	{
     	    		cout<<"4"<<endl;
     	    		cout<<"posotion:"<<row<<","<<col<<endl;
-    	    		//finalpath.push_back(move[i]);
 
             		visited[row][col] = true; 
             		queueNode neighbor;
@@ -98,12 +97,7 @@ int main(){
 	int dest [] = {0, 5};
 	
 	BFS(m, source, dest);
-//	int dist = BFS(m, source, dest, finalpath);
-//
-//	if (dist != -1)
-//		cout << "Shortest Path is " << dist<< " and it is:" << finalpath<< endl ;
-//	else
-//	    cout << "Shortest Path doesn't exist";
+
 	  
 	    return 0;  
 }
