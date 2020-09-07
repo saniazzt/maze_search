@@ -17,6 +17,7 @@ bool isSafe(int row, int col, int m[][MAX],
     return true;
 }
 
+
 void bestpath(int &row, int &col, int m[][MAX], int n, string &path,
               bool visited[MAX][MAX], int newrow[], int newcol[]) {
 
