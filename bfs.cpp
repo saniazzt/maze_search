@@ -11,6 +11,7 @@ class queueNode
 public:
     int Point [2];
     int dist;
+    string path;
 };
 
 
@@ -18,7 +19,7 @@ int rowNum[] = {-1, 1, 0, 0};
 int colNum[] = {0, 0, -1, 1};
 char move [] = {'U','D','L','R'};
 
-int BFS(int m[][COL], int src[], int dest[], string &finalpath) 
+void BFS(int m[][COL], int src[], int dest[])
 {
 	cout<<"1"<<endl;
 	
@@ -32,6 +33,7 @@ int BFS(int m[][COL], int src[], int dest[], string &finalpath)
     s.Point[0] = src[0];
     s.Point[1] = src[1];
     s.dist = 0;
+    s.path = "";
     
     q.push(s);
     
@@ -42,8 +44,12 @@ int BFS(int m[][COL], int src[], int dest[], string &finalpath)
     	queueNode curr = q.front();
         int pt[2] = {curr.Point[0],curr.Point[1]};
         
-        if (pt[0] == dest[0] && pt[1] == dest[1]) 
-                    return curr.dist ;
+        if (pt[0] == dest[0] && pt[1] == dest[1]) {
+        	cout<<"Here's a path:"<<curr.path<<endl;
+        	cout<<"path lenght:"<<curr.dist;
+            return;
+        }
+
         q.pop();
         
         for (int i = 0; i < 4; i++) 
@@ -60,18 +66,19 @@ int BFS(int m[][COL], int src[], int dest[], string &finalpath)
             	{
     	    		cout<<"4"<<endl;
     	    		cout<<"posotion:"<<row<<","<<col<<endl;
-    	    		finalpath.push_back(move[i]);
+    	    		//finalpath.push_back(move[i]);
 
             		visited[row][col] = true; 
             		queueNode neighbor;
-            		neighbor.Point[0] = row;
-            		neighbor.Point[1] = col;
+            		neighbor.Point[0] = row; neighbor.Point[1] = col;
             		neighbor.dist = curr.dist + 1 ;
+            		neighbor.path = curr.path + move[i];
+
             		q.push(neighbor);
             	}
         }
     }
-    return -1;
+    return;
 }
 
 int main(){
@@ -80,7 +87,7 @@ int main(){
 	    {
 	    	{1,1,1,1,0,1},
 			{1,0,1,1,1,1},
-			{1,1,0,0,0,1},
+			{1,1,0,0,0,0},
 			{1,0,0,1,1,1},
 			{1,1,1,1,0,1},
 			{1,0,0,0,0,1},
@@ -90,12 +97,13 @@ int main(){
 	int source [] = {6, 2}; 
 	int dest [] = {0, 5};
 	
-	int dist = BFS(m, source, dest, finalpath); 
-	
-	if (dist != -1) 
-		cout << "Shortest Path is " << dist<< " and it is:" << finalpath<< endl ; 
-	else
-	    cout << "Shortest Path doesn't exist"; 
+	BFS(m, source, dest);
+//	int dist = BFS(m, source, dest, finalpath);
+//
+//	if (dist != -1)
+//		cout << "Shortest Path is " << dist<< " and it is:" << finalpath<< endl ;
+//	else
+//	    cout << "Shortest Path doesn't exist";
 	  
 	    return 0;  
 }
