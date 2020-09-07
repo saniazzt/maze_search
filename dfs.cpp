@@ -95,4 +95,6 @@ int main(){
         Point dest = {0, 5};
 
         DFS(m,source,dest);
+
+	    return 0;
 }
